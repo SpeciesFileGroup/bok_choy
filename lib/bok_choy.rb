@@ -14,75 +14,84 @@ module BokChoy
   define_setting :mailto, ENV["BOK_CHOY_API_EMAIL"]
 
   # Finds BHL references for a name
-  # @param scientific_name [String] A canonical scientific name (e.g., Achenium lusitanicum)
-  # @param authors [String, nil] A string of author names without the year (e.g., Skalitzky)
-  # @param year [Integer, nil] The year of publication (e.g., 1884)
-  # @param json [Hash, nil] An optional JSON hash of name and reference data (overrides all other parameters)
-  #
+  # @param scientific_name [String] A canonical scientific name (e.g., Pardosa moesta)
+  # @param reference [String, nil] A reference string (e.g., Docums Mycol. 34(nos 135-136))
+  # @param nomen_event [Boolean, nil] If true, tries to find nomenclatural event reference
   # @param verbose [Boolean] Print headers to STDOUT
   #
   # @return [Hash] A result hash
-  def self.name_refs(scientific_name: nil, authors: nil, year: nil, json: nil, verbose: false)
-    endpoint = 'name_refs'
-    if json.nil?
-      json = {"name": {}}
-      json[:name][:nameString] = scientific_name unless scientific_name.nil?
-      json[:name][:author] = authors unless authors.nil?
-      json[:name][:year] = year unless year.nil?
-    end
-    Request.new(endpoint: endpoint, json: json, verbose: verbose).perform
+  def self.name_refs(name: nil, reference: nil, nomen_event: nil, verbose: false)
+    raise "Name required" if name.nil?
+
+    name_url = ERB::Util.url_encode(name)
+    endpoint = "namerefs/#{name_url}"
+    Request.new(endpoint: endpoint, verbose: verbose).perform
   end
 
-  # Finds BHL nomenclatural event references for a name
-  # @param scientific_name [String] A canonical scientific name (e.g., Achenium lusitanicum)
-  # @param authors [String, nil] A string of author names without the year (e.g., Skalitzky)
-  # @param year [Integer, nil] The year of publication (e.g., 1884)
-  # @param json [Hash, nil] An optional JSON hash of name and reference data (overrides all other parameters)
-  #
+  # Finds a nomenclatural event in BHL by an external ID from a data source
+  # 
+  # @param id [String] An external ID from a data source
   # @param verbose [Boolean] Print headers to STDOUT
-  #
+  # 
   # @return [Hash] A result hash
-  def self.nomen_refs(scientific_name: nil, authors: nil, year: nil, json: nil, verbose: false)
-    endpoint = 'nomen_refs'
-    if json.nil?
-      json = {"name": {}}
-      json[:name][:nameString] = scientific_name unless scientific_name.nil?
-      json[:name][:author] = authors unless authors.nil?
-      json[:name][:year] = year unless year.nil?
-    end
-    Request.new(endpoint: endpoint, json: json, verbose: verbose).perform
+  def self.cached_refs(id, verbose: false)
+    raise "ID required" if id.nil?
+
+    endpoint = "cached_refs/#{id}"
+    Request.new(endpoint: endpoint, verbose: verbose).perform
+  end
+
+  # Get metadata and taxonomic statistics for a BHL item
+  # 
+  # @param id [String] A BHL item ID
+  # @param verbose [Boolean] Print headers to STDOUT
+  # 
+  # @return [Hash] A result hash
+  def self.items(id, verbose: false)
+    raise "ID required" if id.nil?
+
+    endpoint = "items/#{id}"
+    Request.new(endpoint: endpoint, verbose: verbose).perform
   end
 
   # Get BHL reference metadata by page ID
   #
   # @param id [String] A page ID from BHL
-  #
   # @param verbose [Boolean] Print headers to STDOUT
   #
   # @return [Hash, String, Boolean] A JSON-LD hash or CSV
   def self.page(id, verbose: false)
+    raise "ID required" if id.nil?
+
     endpoint = "references/#{id}"
     Request.new(endpoint: endpoint, verbose: verbose).perform
   end
 
-  # Finds BHL references for a taxon (includes references of synonyms)
-  # @param scientific_name [String] A canonical scientific name (e.g., Achenium lusitanicum)
-  # @param authors [String, nil] A string of author names without the year (e.g., Skalitzky)
-  # @param year [Integer, nil] The year of publication (e.g., 1884)
-  # @param json [Hash, nil] An optional JSON hash of name and reference data (overrides all other parameters)
-  #
+  # Finds BHL items in which a given higher taxon is prevalent
+  # 
+  # @param taxon_name [String] A taxonomic name (e.g., Lepidoptera)
   # @param verbose [Boolean] Print headers to STDOUT
   #
   # @return [Hash] A result hash
-  def self.taxon_refs(scientific_name: nil, authors: nil, year: nil, json: nil, verbose: false)
-    endpoint = 'taxon_refs'
-    if json.nil?
-      json = {"name": {}}
-      json[:name][:nameString] = scientific_name unless scientific_name.nil?
-      json[:name][:author] = authors unless authors.nil?
-      json[:name][:year] = year unless year.nil?
-    end
-    Request.new(endpoint: endpoint, json: json, verbose: verbose).perform
+  def self.taxon_items(taxon_name: nil, verbose: false)
+    raise "Taxon name required" if taxon_name.nil?
+
+    taxon_url = ERB::Util.url_encode(taxon_name)
+    endpoint = "taxon_items/#{taxon_url}"
+    Request.new(endpoint: endpoint, verbose: verbose).perform
+  end
+
+  # Gets BHL reference metadata by page ID
+  # 
+  # @param id [String] A page ID from BHL
+  # @param verbose [Boolean] Print headers to STDOUT
+  # 
+  # @return [Hash] A result hash
+  def self.references(id, verbose: false)
+    raise "ID required" if id.nil?
+
+    endpoint = "references/#{id}"
+    Request.new(endpoint: endpoint, verbose: verbose).perform
   end
 
   # Check the API status
