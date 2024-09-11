@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.email         = ["gdower@illinois.edu"]
 
   s.summary       = "BHL Names Client"
-  s.description   = "Bok Choy is a low-level wrapper around the Bionomia API."
+  s.description   = "Bok Choy is a low-level wrapper around the BHLnames API."
   s.homepage      = "https://github.com/SpeciesFileGroup/bok_choy"
   s.license       = "NCSA"
   s.required_ruby_version = ">= 2.4.0"
