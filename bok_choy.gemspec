@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.description   = "Bok Choy is a low-level wrapper around the BHLnames API."
   s.homepage      = "https://github.com/SpeciesFileGroup/bok_choy"
   s.license       = "NCSA"
-  s.required_ruby_version = ">= 2.4.0"
+  s.required_ruby_version = ">= 2.5.0"
 
  # s.metadata["allowed_push_host"] = "TODO: Set to 'https://mygemserver.com'"
 
