@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    bok_choy (0.0.1)
+    bok_choy (0.0.2)
       faraday (~> 2.2)
       faraday-follow_redirects (>= 0.1, < 0.4)
       multi_json (~> 1.15)
