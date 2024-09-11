@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    bok_choy (0.1.0)
+    bok_choy (0.0.1)
       faraday (~> 2.2)
       faraday-follow_redirects (>= 0.1, < 0.4)
       multi_json (~> 1.15)
@@ -14,22 +14,26 @@ GEM
     byebug (11.1.3)
     crack (0.4.5)
       rexml
-    faraday (2.7.10)
-      faraday-net_http (>= 2.0, < 3.1)
-      ruby2_keywords (>= 0.0.4)
+    faraday (2.11.0)
+      faraday-net_http (>= 2.0, < 3.4)
+      logger
     faraday-follow_redirects (0.3.0)
       faraday (>= 1, < 3)
-    faraday-net_http (3.0.2)
+    faraday-net_http (3.3.0)
+      net-http
     hashdiff (1.0.1)
+    logger (1.6.1)
     minitest (5.15.0)
     multi_json (1.15.0)
+    net-http (0.4.1)
+      uri
     power_assert (2.0.1)
     public_suffix (5.0.1)
     rake (13.0.6)
     rexml (3.2.5)
-    ruby2_keywords (0.0.5)
     test-unit (3.5.3)
       power_assert
+    uri (0.13.1)
     vcr (6.0.0)
     webmock (3.18.1)
       addressable (>= 2.8.0)

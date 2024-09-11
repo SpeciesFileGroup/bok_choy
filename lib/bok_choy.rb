@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 require "erb"
 require_relative "bok_choy/error"
 require_relative "bok_choy/version"
@@ -14,18 +13,28 @@ module BokChoy
   define_setting :mailto, ENV["BOK_CHOY_API_EMAIL"]
 
   # Finds BHL references for a name
-  # @param scientific_name [String] A canonical scientific name (e.g., Pardosa moesta)
+  # @param name [String] A canonical scientific name (e.g., Pardosa moesta)
+  # @param author [String, nil] An author string (e.g., Banks)
+  # @param year [String, nil] A year string (e.g., 1892)
   # @param reference [String, nil] A reference string (e.g., Docums Mycol. 34(nos 135-136))
-  # @param nomen_event [Boolean, nil] If true, tries to find nomenclatural event reference
+  # @param nomen_event [Boolean, nil] If true, tries to find nomenclatural event reference (default: true)
+  # @param json [Hash, nil] An optional JSON hash of name and reference data (overrides all other parameters)
   # @param verbose [Boolean] Print headers to STDOUT
   #
   # @return [Hash] A result hash
-  def self.name_refs(name: nil, reference: nil, nomen_event: nil, verbose: false)
-    raise "Name required" if name.nil?
+  def self.name_refs(name: nil, author: nil, year: nil, reference: nil, nomen_event: true, json: nil, verbose: false)
+    raise "Name or json required" if name.nil? && json.nil?
 
-    name_url = ERB::Util.url_encode(name)
-    endpoint = "namerefs/#{name_url}"
-    Request.new(endpoint: endpoint, verbose: verbose).perform
+    if json.nil?
+      json = {'name': {}, 'reference': {}, 'params': {}}
+      json[:name][:nameString] = name
+      json[:name][:author] = author unless author.nil?
+      json[:name][:year] = year unless year.nil?
+      json[:reference][:refString] = reference unless reference.nil?
+      json[:params][:nomenEvent] = nomen_event
+    end
+    endpoint = "name_refs"
+    Request.new(endpoint: endpoint, json: json, verbose: verbose).perform
   end
 
   # Finds a nomenclatural event in BHL by an external ID from a data source

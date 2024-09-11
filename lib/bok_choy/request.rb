@@ -46,9 +46,7 @@ module BokChoy
       conn.headers["X-USER-AGENT"] = make_user_agent
       conn.headers['Content-Type'] = 'application/json'
 
-      if %w[name_refs nomen_refs taxon_refs].include? endpoint
-        # post to endpoint with json as body
-        
+      if %w[name_refs].include? endpoint
         res = conn.post(endpoint, opts[:json])
       else
         res = conn.get(endpoint, opts)

@@ -20,49 +20,65 @@ Or install it yourself as:
 
 ## Usage
 
+### [Name references](https://bhlnames.globalnames.org/apidoc/index.html#/default/post-name-refs)
+Although BHLnames offers a GET endpoint, the API wrapper always encodes the input parameters into JSON and uses the POST endpoint. 
+For more control of the input parameters, you can omit all other parameters and directly post JSON. See the [API docs]((https://bhlnames.globalnames.org/apidoc/index.html#/default/post-name-refs)) for the full list of possible inputs in the JSON.
+
+Find BHL reference matches for a scientific name
+```ruby
+BokChoy.name_refs(name: 'Pardosa moesta') #  => Hash
+```
+
+Find BHL reference matches with a scientific name, author and year:
+```ruby
+BokChoy.name_refs(name: 'Pardosa moesta', author: 'Banks', year: 1892, reference: 'Bulletin of the American Museum of Natural History v.29 (1911)', nomen_event: false) #  => Hash
+```
+
+Find BHL reference matches for a scientific name with a reference string:
+```ruby
+BokChoy.name_refs(name: 'Pardosa moesta', reference: 'Bulletin of the American Museum of Natural History v.29 (1911)') #  => Hash
+```
+
+Find BHL reference matches for a nomenclatural event:
+```ruby
+BokChoy.name_refs(name: 'Pardosa moesta', nomen_event: true) #  => Hash
+```
+
+Find BHL reference matches with json input:
+```ruby
+BokChoy.name_refs(json: {"name": {"nameString": "Pardosa moesta", "author": "Banks", "year": 1892}, "reference": {}, "params": {"nomenEvent": true}}) #  => Hash
+```
 
 ---
-### Ping
+### [Item metadata](https://bhlnames.globalnames.org/apidoc/index.html#/default/get-item)
+Get BHL item metadata by item ID:
+```ruby
+BokChoy.items(73397) #  => Hash
+```
+
+---
+### [Page reference metadata](https://bhlnames.globalnames.org/apidoc/index.html#/default/get-refs)
+Get BHL reference metadata by a page ID:
+```ruby
+BokChoy.references(6589171) #  => Hash
+```
+
+---
+### [External identifiers](https://bhlnames.globalnames.org/apidoc/index.html#/default/get-cached-refs)
+Get a nomenclatural event in BHL by an external identifier:
+```ruby
+BokChoy.cached_refs('6C8Q2') #  => Hash
+```
+
+---
+### [Ping](https://bhlnames.globalnames.org/apidoc/index.html#/default/get-ping)
 Test the status of the API service:
 ```ruby
 BokChoy.ping  #  => String
 ```
 
 ---
-### Name references
-Find BHL references for a scientific name
-```ruby
-BokChoy.name_refs(scientific_name: 'Achenium lusitanicum', authors: 'Skalitzky', year: 1884) #  => Hash
-```
-Find a BHL reference for a scientific name with a [JSON request](https://bhlnames.globalnames.org/apidoc/index.html#/default/post-name-refs):
-```ruby
-BokChoy.name_refs(json: BokChoy.name_refs(json: {"id": "11111", "name": {"authors": "Skalitzky", "nameString": "Achenium lusitanicum", "year": 1884}, "reference": {"yearStart": 1883, "yearEnd": 1885}})) #  => Hash
-```
-
----
-### Nomenclatural references
-Find BHL nomenclatural event references for a scientific name
-```ruby
-BokChoy.nomen_refs(scientific_name: 'Achenium lusitanicum', authors: 'Skalitzky', year: 1884) #  => Hash
-```
-Find BHL nomenclatural event references for a scientific name with a [JSON request](https://bhlnames.globalnames.org/apidoc/index.html#/default/post-nomen-refs):
-```ruby
-BokChoy.nomen_refs(json: BokChoy.name_refs(json: {"id": "11111", "name": {"authors": "Skalitzky", "nameString": "Achenium lusitanicum", "year": 1884}, "reference": {"yearStart": 1883, "yearEnd": 1885}})) #  => Hash
-```
-
----
-### Taxon references
-Find BHL references for a taxon (includes references to synonyms of the taxon in BHL)
-```ruby
-BokChoy.taxon_refs(scientific_name: 'Achenium lusitanicum', authors: 'Skalitzky', year: 1884) #  => Hash
-```
-Find BHL references for a taxon with a [JSON request](https://bhlnames.globalnames.org/apidoc/index.html#/default/post-taxon-refs):
-```ruby
-BokChoy.taxon_refs(json: BokChoy.name_refs(json: {"id": "11111", "name": {"authors": "Skalitzky", "nameString": "Achenium lusitanicum", "year": 1884}, "reference": {"yearStart": 1883, "yearEnd": 1885}})) #  => Hash
-```
-
----
-### Version
+### [Version](https://bhlnames.globalnames.org/apidoc/index.html#/default/get-version)
 Get the version of the BHLnames API service:
 ```ruby
 BokChoy.version  #  => Hash
