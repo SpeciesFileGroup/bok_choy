@@ -22,7 +22,7 @@ Or install it yourself as:
 
 ### [Name references](https://bhlnames.globalnames.org/apidoc/index.html#/default/post-name-refs)
 Although BHLnames offers a GET endpoint, the API wrapper always encodes the input parameters into JSON and uses the POST endpoint. 
-For more control of the input parameters, you can omit all other parameters and directly post JSON. See the [API docs]((https://bhlnames.globalnames.org/apidoc/index.html#/default/post-name-refs)) for the full list of possible inputs in the JSON.
+For more control of the input parameters, you can omit all other parameters and directly post JSON. See the [API docs](https://bhlnames.globalnames.org/apidoc/index.html#/default/post-name-refs) for the full list of possible inputs in the JSON.
 
 Find BHL reference matches for a scientific name
 ```ruby
@@ -90,7 +90,7 @@ BokChoy.version  #  => Hash
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, update the `CHANGELOG.md`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
 ## Contributing
 
