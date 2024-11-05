@@ -1,4 +1,5 @@
 ## [Unreleased]
+ - Updated license from NCSA to MIT
 
 ## [0.0.3] - 2024-09-11
 - Removed Gemfile.lock

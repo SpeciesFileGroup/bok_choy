@@ -98,7 +98,7 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/Specie
 
 ## License
 
-The gem is available as open source under the terms of the [NCSA/Illinois](https://github.com/SpeciesFileGroup/bok_choy/blob/main/LICENSE.txt) license. You can learn more about the NCSA license on [Wikipedia](https://en.wikipedia.org/wiki/University_of_Illinois/NCSA_Open_Source_License) and compare it with other open source licenses at the [Open Source Initiative](https://opensource.org/license/uoi-ncsa-php/).
+The gem is available as open source under the terms of the [MIT license](https://github.com/SpeciesFileGroup/bok_choy/blob/main/LICENSE.txt). You can learn more about the MIT license on [Wikipedia](https://en.wikipedia.org/wiki/MIT_License) and compare it with other open source licenses at the [Open Source Initiative](https://opensource.org/license/mit/).
 
 ## Code of Conduct
 
