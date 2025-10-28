@@ -1,6 +1,6 @@
 ## [Unreleased]
 
-## [0.0.4]
+## [0.0.4] - 2025-10-28
  - Updated license from NCSA to MIT
  - Added item_page endpoint
 
