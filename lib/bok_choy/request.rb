@@ -8,6 +8,8 @@ module BokChoy
     attr_accessor :endpoint
     attr_accessor :q
     attr_accessor :verbose
+    attr_accessor :item_id
+    attr_accessor :page_num
 
     attr_accessor :options
 
@@ -15,6 +17,8 @@ module BokChoy
       @endpoint = args[:endpoint]
       @verbose = args[:verbose]
       @q = args[:q]
+      @item_id = args[:item_id]
+      @page_num = args[:page_num]
       @json = args[:json].to_json
       @options = args[:options] # TODO: not added at bok_choy.rb
     end
@@ -22,9 +26,12 @@ module BokChoy
     def perform
 
       args = {
-        json: @json
+        json: @json,
+        item_id: @item_id,
+        page_num: @page_num
       }
       opts = args.delete_if { |_k, v| v.nil? }
+      opts = args.delete_if { |_k, v| v == 'null' }
 
       Faraday::Utils.default_space_encoding = "+"
 

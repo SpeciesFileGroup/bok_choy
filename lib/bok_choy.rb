@@ -50,6 +50,20 @@ module BokChoy
     Request.new(endpoint: endpoint, verbose: verbose).perform
   end
 
+  # Get a page by item ID and page number
+  #
+  # @param item_id [String] A BHL item ID
+  # @param page_num [String] A BHL page number
+  # @param verbose [Boolean] Print headers to STDOUT
+  #
+  # @return [Hash] A result hash
+  def self.items_page_nums(item_id: nil, page_num: nil, verbose: false)
+    raise "Item ID and page number required" if item_id.nil? || page_num.nil?
+
+    endpoint = "items_page_nums"
+    Request.new(endpoint: endpoint, item_id: item_id, page_num: page_num, verbose: verbose).perform
+  end
+
   # Get metadata and taxonomic statistics for a BHL item
   # 
   # @param id [String] A BHL item ID

@@ -57,6 +57,13 @@ BokChoy.items(73397) #  => Hash
 ```
 
 ---
+### [Items page nums](https://bhlnames.globalnames.org/apidoc/index.html#/default/get-refs-by-item-page)
+Get BHL page information by item_id and page_num:
+```ruby
+BokChoy.item_page(item_id: 15402, page_num: 183) #  => Hash
+```
+
+---
 ### [Page reference metadata](https://bhlnames.globalnames.org/apidoc/index.html#/default/get-refs)
 Get BHL reference metadata by a page ID:
 ```ruby

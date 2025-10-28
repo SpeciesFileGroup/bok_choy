@@ -1,5 +1,8 @@
 ## [Unreleased]
+
+## [0.0.4]
  - Updated license from NCSA to MIT
+ - Added item_page endpoint
 
 ## [0.0.3] - 2024-09-11
 - Removed Gemfile.lock
