@@ -60,8 +60,14 @@ BokChoy.items(73397) #  => Hash
 ### [Items page nums](https://bhlnames.globalnames.org/apidoc/index.html#/default/get-refs-by-item-page)
 Get BHL page information by item_id and page_num:
 ```ruby
-BokChoy.items_page_nums(item_id: 15402, page_num: 183) #  => Hash
+BokChoy.items_page_nums(item_id: 15402, page_num: 191) #  => Hash
 ```
+This corresponds with the identifiers in the BHL item endpoint URLs: [https://www.biodiversitylibrary.org/item/15402#page/191/mode/1up](https://www.biodiversitylibrary.org/item/15402#page/191/mode/1up)
+
+The endpoint returns information about the page including the corresponding pageId and url:
+
+[https://www.biodiversitylibrary.org/page/15402](https://www.biodiversitylibrary.org/page/747872)
+
 
 ---
 ### [Page reference metadata](https://bhlnames.globalnames.org/apidoc/index.html#/default/get-refs)
